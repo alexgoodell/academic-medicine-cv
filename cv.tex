@@ -1,0 +1,371 @@
+%         ░█▄▒▄█▒██▀░█▀▄░░░▄▀▀░█▒█░░░▀█▀▒██▀░█▄▒▄█▒█▀▄░█▒░▒▄▀▄░▀█▀▒██▀
+%         ░█▒▀▒█░█▄▄▒█▄▀▒░░▀▄▄░▀▄▀▒░░▒█▒░█▄▄░█▒▀▒█░█▀▒▒█▄▄░█▀█░▒█▒░█▄▄
+%
+%
+%   This is a LaTex/Bibtex template for academic medicine.
+%   Details at https://github.com/alexgoodell/medcv
+
+%   Inspired by the following repos. Drop a star if helpful to you!
+%         - https://github.com/Xovee/latex-cv
+%         - https://github.com/rgeirhos/academic-cv-publications
+
+
+% ███████████████████████████████ PREAMBLE █████████████████████████████████████
+
+
+% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ IMPORT ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+% \documentclass[10pt]{article}
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[full]{textcomp}
+\usepackage{CJKutf8}
+\usepackage[lf]{ebgaramond}
+%\usepackage[scaled,swashQ]{garamondx}
+\usepackage[T1]{fontenc}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{amsmath}
+\usepackage{eqparbox}
+
+
+% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ PAGE SETUP ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\pagestyle{headings}
+%\markright{\textit{John E. Smith}} %header off
+\setlength\parindent{2em}
+\thispagestyle{empty}
+
+
+% ━━━━━━━━━━━━━━━━━━━━━ CUSTOM HEADERS AND LISTS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+% cv sections
+\newcommand{\cvsection}[1]{\section*{\rmfamily#1}}
+\newcommand{\cvsubsection}[1]{\subsection*{\rmfamily\hspace{1.5em}#1}}
+\newcommand{\cvsubsubsection}[1]{\subsubsection*{\rmfamily\hspace{1em}#1}}
+\newcommand{\HL}[1]{\textbf{\color{red}#1}}
+
+% my list
+\usepackage{enumitem}
+\usepackage{mweights}
+\newcommand{\myliststart}{\begin{description}[font=\normalfont,
+    labelindent=2em,leftmargin=10em,style=nextline]}
+\newcommand{\mylistend}{\end{description}}
+
+% presentation list
+\newcommand{\presentationliststart}{\begin{description}[font=\normalfont,
+    labelindent=2em,leftmargin=7em,style=nextline]}
+\newcommand{\presentationlistend}{\end{description}}
+
+
+
+
+% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ CITATIONS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+% Import reference manager
+\usepackage{babel}
+\usepackage[
+  backend=biber,
+  % style=reading,
+  style=nature,
+  intitle = true, % allows for chapter title inclusion
+  isbn=true,
+  doi=true,
+  url=true,
+  sorting=ynt,
+  clearlang=true,
+  date=year,
+  uniquelist=false,
+  maxbibnames=12,
+  maxcitenames=1,
+  defernumbers=true
+]{biblatex}
+
+% define bibliograph source
+\addbibresource{bibliography.bib}
+
+% Add unique entry type for dataset
+\DefineBibliographyStrings{english}{
+  dataset = {dataset},
+}
+\renewbibmacro{begentry}{%
+  \ifkeyword{meta}{\textsuperscript{*}}{}%
+  \ifentrytype{dataset}
+    {\bibstring{[dataset] }%
+     \setunit{\addspace}}
+    {}%
+}
+
+% remove "et al" styling
+\renewbibmacro*{name:andothers}{%
+  \ifboolexpr
+    {
+      test {\ifnumequal{\value{listcount}}{\value{liststop}}}
+      and
+      test \ifmorenames
+    }
+  {
+        \ifnumgreater{\value{liststop}}{1}
+      {\finalandcomma}
+      {}%
+      \andothersdelim
+      \bibstring{andothers}%
+    }
+  {}%
+}
+
+% add a left indent on bibliography
+\defbibenvironment{bibliography}
+  {\list
+     {\printtext[labelnumberwidth]{%
+      \printfield{labelprefix}%
+      \printfield{labelnumber}}}
+     {\setlength{\labelwidth}{\labelnumberwidth}%
+      \setlength{\leftmargin}{\labelwidth}%
+      \setlength{\labelsep}{\biblabelsep}%
+      \addtolength{\leftmargin}{\labelsep}%
+      \addtolength{\leftmargin}{2em}%<----- here
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}%
+      \renewcommand*{\makelabel}[1]{\hss##1}}
+  {\endlist}
+  {\item}
+
+% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ LINKS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+\usepackage[
+    hidelinks,
+    pdfnewwindow=true,
+    pdfauthor={John E. Smith},
+    pdftitle={Curriculum Vitae of John E. Smith},
+    pdfpagemode=UseThumbs,
+]{hyperref}
+\hypersetup{colorlinks=true, linkcolor=teal, urlcolor=teal, citecolor=teal, anchorcolor=teal}
+\usepackage{xurl}
+
+
+% ███████████████████████████████ DOCUMENT █████████████████████████████████████
+
+
+\begin{document}
+
+% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Title Content ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+% name
+\begin{center}
+    \Huge{\textbf{Curriculum Vitae}}
+\end{center}
+
+\begin{center}
+    \large{\textit{John E. Smith, MD}}
+\end{center}
+
+\vspace{15pt}
+
+
+\setlength{\parskip}{5pt}
+\renewcommand{\arraystretch}{1.25}
+
+% ━━━━━━━━━━━━━━━━━━━━━━━━━━━ Identifying data ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+\cvsection{A. Identifying Data}
+
+
+\myliststart
+\item[Name] John Edward Smith
+\item[Website] \url{https://johnsmith.com}
+\mylistend
+
+% ━━━━━━━━━━━━━━━━━━━━━━━━━━━ Academic History ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+\cvsection{B. Academic History}
+
+\cvsubsection{Colleges and Universities Attended:}
+\indent
+
+\eqparbox[t]{date}{9/2005 \textendash~5/2009} \hfill
+\eqparbox{degree}{B.S.} \hfill
+\eqparbox{major}{Biochemistry} \hfill
+\eqparbox{edu-univ}{Ivy League University} \hfill
+
+
+\eqparbox[t]{date}{8/2009 \textendash~5/2011} \hfill
+\eqparbox{degree}{M.S.} \hfill
+\eqparbox{major}{Molecular Biology} \hfill
+\eqparbox{edu-univ}{State University} \hfill
+
+\eqparbox[t]{date}{8/2011 \textendash~5/2015} \hfill
+\eqparbox{degree}{M.D.} \hfill
+\eqparbox{major}{Medicine} \hfill
+\eqparbox{edu-univ}{Top Medical School} \hfill
+
+\cvsubsection{Post-graduate Training:}
+\indent
+
+\myliststart
+\item[6/2015 \textendash~6/2018] Residency in Internal Medicine, University Hospital
+\item[7/2018 \textendash~6/2021] Fellowship in Cardiology, Academic Medical Center
+\item[7/2021 \textendash~6/2022] Advanced Fellowship in Interventional Cardiology, Research Institute
+\mylistend
+
+\cvsubsection{Board Certification:}
+\myliststart
+\item[10/2018] American Board of Internal Medicine
+\item[11/2021] American Board of Cardiovascular Disease
+\mylistend
+
+\cvsubsection{Licensure:}
+\myliststart
+\item[7/2015] Physician and Surgeon, State Medical Board
+\mylistend
+
+
+% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Employment ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+\cvsection{C. Employment}
+
+\cvsubsection{Academic Appointments:}
+
+\myliststart
+\item[7/2022 \textendash~Present] Assistant Professor, Department of Medicine, Division of Cardiology, University Medical Center
+\item[8/2022 \textendash~Present] Attending Physician, Cardiac Catheterization Laboratory, University Hospital
+\mylistend
+
+\cvsubsection{Other Appointments:}
+
+\myliststart
+\item[6/2008]	Research Assistant, Cardiovascular Research Lab, Ivy League University
+\item[6/2010 \textendash~8/2010]	Clinical Research Intern, National Heart Institute
+\item[7/2013]	Medical Student Researcher, Global Health Initiative, Top Medical School
+\item[9/2016 \textendash~6/2018]	Quality Improvement Fellow, Department of Medicine, University Hospital
+\mylistend
+
+
+% ━━━━━━━━━━━━━━━━━━━━━ Teaching and Clinical Care ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+\cvsection{D. Teaching and Clinical Care}
+
+\cvsubsubsection{Clinical Teaching Responsibilities:}
+
+\myliststart
+\item[9/2022 \textendash~Present] Course Director, Cardiovascular Physical Examination, Medical Student Education, University Medical Center
+\item[7/2023 \textendash~Present] Faculty Mentor, Cardiology Fellowship Program, University Medical Center
+\mylistend
+
+
+\cvsubsubsection{Students / Trainees / Mentorship:}
+\myliststart
+\item[6/2023 \textendash~Present]	Jane Doe, MD/PhD Student, School of Medicine, University Medical Center, 2 hours / week
+Advising thesis project on novel biomarkers for early detection of heart failure.
+\item[9/2023 \textendash~Present]	Richard Roe, Cardiology Fellow, Department of Medicine, University Medical Center, 1 hour / week
+Mentoring research project on outcomes of transcatheter aortic valve replacement in octogenarians.
+\mylistend
+
+% ━━━━━━━━━━━━━━━━━━━━━ Public and Professional Service ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+\cvsection{E. Public and Professional Service}
+
+\cvsubsection{Community Service Related to Professional Work:}
+
+\myliststart
+\item[6/2016 \textendash~Present] Volunteer Physician, Free Medical Clinic, Local Community Health Center
+\item[9/2019 \textendash~Present]	Medical Advisory Board Member, Heart Health Foundation
+\item[3/2021 \textendash~Present]	Scientific Committee Member, National Cardiovascular Disease Prevention Initiative
+\mylistend
+
+\cvsubsection{Professional Societies:}
+
+\myliststart
+\item[2015]	Member, American College of Physicians
+\item[2018]	Member, American Heart Association
+\item[2021]	Fellow, American College of Cardiology
+\item[2022]	Member, Society for Cardiovascular Angiography and Interventions
+\mylistend
+
+\cvsubsection{Ad Hoc Reviewer:}
+
+\myliststart
+\item[2020]	Journal of the American College of Cardiology
+\item[2021]	Circulation
+\item[2022]	New England Journal of Medicine
+\mylistend
+
+% ━━━━━━━━━━━━━━━━━━━━━ Honors and Awards  ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+\cvsection{F. Post-Degree Honors and Awards}
+
+\myliststart
+
+\item[5/2015]   Alpha Omega Alpha Honor Medical Society, Top Medical School
+\item[6/2018]   Resident Teacher of the Year Award, Department of Medicine, University Hospital
+\item[11/2020]  Young Investigator Award, American Heart Association Scientific Sessions
+\item[9/2021]   Excellence in Research Award, Cardiology Fellowship Program, Academic Medical Center
+\item[3/2023]   Early Career Investigator Grant, National Heart, Lung, and Blood Institute
+\item[6/2024]   Outstanding Junior Faculty Award, Department of Medicine, University Medical Center
+
+\mylistend
+
+% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Bibliography ━━━━━━━━━━━━━━━━━━━━━━━━━
+
+\cvsection{G. Bibliography}
+
+\nocite{*} % required for fake cite everything
+
+\cvsubsection{Peer-reviewed articles}
+    \indent \printbibliography[keyword={published article},heading=none,resetnumbers=true]
+
+\cvsubsection{Peer-reviewed articles, submitted}
+    \printbibliography[keyword={submitted article},heading=none,resetnumbers=true]
+
+\cvsubsection{Peer-reviewed abstracts}
+    \printbibliography[keyword={abstract},heading=none,resetnumbers=true]
+
+\cvsubsection{Book chapters}
+    \printbibliography[keyword={chapter},heading=none,resetnumbers=true]
+
+\cvsubsection{Books}
+    \printbibliography[keyword={book},heading=none,resetnumbers=true]
+
+\cvsubsection{Digital publications and datasets}
+    \printbibliography[keyword={dataset},heading=none,resetnumbers=true]
+
+\cvsubsection{Other publications}
+    \printbibliography[keyword={photography},heading=none,resetnumbers=true]
+
+% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Presentations ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+\cvsection{H. Invited Presentations}
+
+\cvsubsection{Local presentations}
+
+\presentationliststart
+    \item[9/2018] \textbf{Smith, J. E.}. Advances in Cardiovascular Risk Assessment. Grand Rounds, Department of
+    Medicine, University Hospital.
+    \item[3/2019] \textbf{Smith, J. E.}, Johnson, A. B. Novel Biomarkers in Acute Coronary Syndrome.
+    Cardiology Fellowship Lecture Series, Academic Medical Center.
+    \item[11/2020] \textbf{Smith, J. E.} Optimizing Door-to-Balloon Time in ST-Elevation Myocardial Infarction.
+    Quality Improvement Seminar, University Hospital.
+    \item[5/2021] \textbf{Smith, J. E.} The Role of Cardiac MRI in Diagnosing Myocarditis.
+    Radiology-Cardiology Joint Conference, University Medical Center.
+    \item[2/2022] \textbf{Smith, J. E.} Transcatheter Aortic Valve Replacement: Current Evidence and Future Directions.
+    Cardiovascular Medicine Update, State Medical Society.
+    \item[10/2023] \textbf{Smith, J. E.}, Davis, C. D. Artificial Intelligence in Cardiovascular Imaging: Promises and Pitfalls.
+    Medical Informatics Symposium, University Medical Center.
+    \url{https://medcenter.edu/ai-cardio-imaging}
+\presentationlistend
+
+\cvsubsection{National presentations:}
+
+\presentationliststart
+    \item[11/2019] Smith, J.E., Johnson, A.B., Brown, M.L. Long-term Outcomes of Early Invasive Strategy in Non-ST Elevation Myocardial Infarction.
+    American Heart Association Scientific Sessions, Philadelphia, Pennsylvania.
+    \item[3/2021] \textbf{Smith, J. E.}, Davis, C. D., Wilson, E. F. Predictors of Major Adverse Cardiovascular Events
+    in Patients with Coronary Microvascular Dysfunction.
+    American College of Cardiology Annual Scientific Session,
+    Atlanta, Georgia.
+    \item[5/2023] \textbf{Smith, J. E.}, Johnson, A. B., Lee, R. S. Impact of Frailty on Outcomes After
+    Transcatheter Aortic Valve Replacement: A Multi-Center Analysis.
+    Society for Cardiovascular Angiography and Interventions Scientific Sessions, Phoenix, Arizona.
+\presentationlistend
+
+\end{document}
