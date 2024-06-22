@@ -1,6 +1,6 @@
 # Academic Physician CV LaTeX Template
 
-A professional and customizable LaTeX CV template tailored for academic physicians, allowing  integration of publications and presentations using BibTeX.
+A professional and customizable LaTeX CV template tailored for academic physicians, allowing  integration of publications and presentations using BibTeX. More information at the [GitHub Repo](https://github.com/alexgoodell/academic-medicine-cv)
 
 ## Features
 
@@ -17,7 +17,7 @@ A professional and customizable LaTeX CV template tailored for academic physicia
 4. Customize the content to fit your academic and clinical experience.
 5. Complile the Bibtex 
 6. Compile the document twice to generate your CV.
-7. Alternatively, this can be done in overleaf using this template: 
+7. Alternatively, this can be done in [Overleaf](https://overleaf.com) by searching "Academic Medicine CV" or by using [this link](https://www.overleaf.com/read/cfxmtgbrrnxh#6bc399).
 
 ## Managing Your Bibliography
 
