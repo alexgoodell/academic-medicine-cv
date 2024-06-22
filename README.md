@@ -2,8 +2,8 @@
 
 A professional and customizable LaTeX CV template tailored for academic physicians, allowing  integration of publications and presentations using BibTeX. More information at the [GitHub Repo](https://github.com/alexgoodell/academic-medicine-cv).
 
-<img width="450" alt="SCR-20240622-bjds" src="https://github.com/alexgoodell/academic-medicine-cv/assets/2191507/57eb75f7-45c5-4a92-9a43-3b88c68e4038">
-<img width="450" alt="SCR-20240622-bjjo" src="https://github.com/alexgoodell/academic-medicine-cv/assets/2191507/925a892b-7749-4381-982c-66500b9f0b54">
+<img width="400" alt="SCR-20240622-bjds" src="https://github.com/alexgoodell/academic-medicine-cv/assets/2191507/57eb75f7-45c5-4a92-9a43-3b88c68e4038">
+<img width="400" alt="SCR-20240622-bjjo" src="https://github.com/alexgoodell/academic-medicine-cv/assets/2191507/925a892b-7749-4381-982c-66500b9f0b54">
 
 ## Features
 
